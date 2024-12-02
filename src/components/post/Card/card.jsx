@@ -2,8 +2,16 @@ import style from './Card.module.css'
 import Button from './../../buttons/button'
 import Tags from '../../Tags/Tags'
 import placeholderImage from '/src/assets/placeholder.webp'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
+
 
 function Card({ title = '', tags, content = '', image }) {
+
+    function delPost(postText) {
+        setNewPosts(newPosts.filter(post => post !== postText))
+    }
+
 
     return (
         <div className={style.card}>
@@ -18,7 +26,10 @@ function Card({ title = '', tags, content = '', image }) {
                 <p className={style.description}>
                     {content}
                 </p>
-                <Button />
+                <div className={style.down_buttons}>
+                    <Button />
+                    <button className={style.btn} onClick={delPost}>Elimina</button>
+                </div>
             </div>
         </div>
     )
