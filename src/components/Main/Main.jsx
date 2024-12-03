@@ -6,14 +6,10 @@ import { useState } from 'react'
 function Main() {
 
     const [newPosts, setNewPosts] = useState(posts)
-    const [newTitle, setTitle] = useState('Naruto')
+    const [newTitle, setTitle] = useState('')
 
     function addPost(e) {
         e.preventDefault()
-
-        // const newTitle = newTitle.trim()
-
-
 
         const newPost = {
             id: Date.now(),
@@ -24,17 +20,18 @@ function Main() {
             published: true,
         }
 
-
-
         if (newTitle === '') return
-
-
 
         setNewPosts([...newPosts, newPost])
         setTitle('')
 
         console.log({ newPost })
     }
+
+    function delPost(id) {
+        setNewPosts(newPosts.filter(post => post.id !== id))
+    }
+
 
     const tags = []
 
@@ -46,6 +43,7 @@ function Main() {
         });
     });
 
+
     return (
         <>
             <main>
@@ -56,10 +54,9 @@ function Main() {
                         <input className='input_btn' type="submit" value='Crea nuovo post' />
                     </form>
                     <div className="row">
-
                         {newPosts.map((post) => (
                             <div key={post.id} className="col-6">
-                                {post.published === true && <Card title={post.title} tags={post.tags} content={post.content} image={post.image} />}
+                                {post.published === true && <Card callback={() => delPost(post.id)} title={post.title} tags={post.tags} content={post.content} image={post.image} />}
                             </div>
                         ))}
                     </div>
