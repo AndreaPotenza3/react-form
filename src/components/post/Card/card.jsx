@@ -6,11 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons'
 
 
-function Card({ title = '', tags, content = '', image }) {
+function Card({ callback, title = '', tags, content = '', image }) {
 
-    function delPost(postText) {
-        setNewPosts(newPosts.filter(post => post !== postText))
-    }
+
 
 
     return (
@@ -28,7 +26,7 @@ function Card({ title = '', tags, content = '', image }) {
                 </p>
                 <div className={style.down_buttons}>
                     <Button />
-                    <button className={style.btn} onClick={delPost}>Elimina</button>
+                    <button className={style.btn} onClick={callback}>Elimina</button>
                 </div>
             </div>
         </div>
